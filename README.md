@@ -1,6 +1,11 @@
 # Phrase-Pair-Injection  
-## USAGE
+## Prerequisites
 
+1. [Moses Decoder](http://www2.statmt.org/moses/?n=Development.GetStarted)
+2. SRILM
+
+
+## USAGE
 
 ### Training PBSMT
 ```
