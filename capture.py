@@ -45,6 +45,11 @@ if __name__ == "__main__":
     f2: hindi new
     f3: marathi new
     f4: stats new
+    find following values in moses.ini
+    lm = language model val
+    dist = distortion val
+    wp = word penalty
+    tm = translation prob val
     '''
     fp=open(f1,"r")
     fh=open(f2,"w")
@@ -76,5 +81,4 @@ if __name__ == "__main__":
     fh.close()
     fm.close()
     fs.close()
-
 
