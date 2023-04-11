@@ -1,5 +1,7 @@
 import statistics
 import sys
+import re
+import string
 #bn-hi 0.5 0.3 -1 0.2
 #-0.0175885 0.0547269 0.23071 0.0235061
 #0.00486439 0.0519429 0.166653 -0.0122001 HiMr ILCI BPE
@@ -56,6 +58,7 @@ if __name__ == "__main__":
     fm=open(f3,"w")
     fs=open(f4,"w")
     count = 0
+    threshold = 0.98
     for line in fp:
         if count%10000 == 0:
             print(count)
@@ -64,19 +67,13 @@ if __name__ == "__main__":
         probs=line[2].strip().split()
         wa=weighted_average(probs)
         entries.append(wa)
-        main.append(line)
-    fs.write("max: "+str(max(entries))+"\n")
-    fs.write("min: "+str(min(entries))+"\n")
-    fs.write("mean: "+str(statistics.mean(entries))+"\n")
-    fs.write("sd: "+str(statistics.stdev(entries))+"\n")
-    #threshold=statistics.mean(entries)+0.5*statistics.stdev(entries)
-    threshold = 0.98
-    for itr in main:
-        probs=itr[2].strip().split()
-        wa=weighted_average(probs)
-        if(wa>=threshold):
-            fh.write(itr[0].strip()+'\n')
-            fm.write(itr[1].strip()+'\n')
+        src2 = line[0].strip()
+        tgt2 = line[1].strip()
+        temps = src2.translate(str.maketrans('','',string.punctuation)).strip()
+        tempt = tgt2.translate(str.maketrans('','',string.punctuation)).strip()
+        if wa>= threshold and temps != '' and tempt != '' and len(temps) > 2 and len(tempt) >2 and not temps.isdecimal() and not tempt.isdecimal():
+            fh.write(src2 +'\n')
+            fm.write(tgt2 +'\n') 
     fp.close()
     fh.close()
     fm.close()
