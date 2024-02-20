@@ -18,7 +18,7 @@ LM=$4
 
 # path to mosesdecoder
 moses=$5
-$moses/scripts/training/clean-corpus-n.perl $corpus/train hi mr $corpus/train.clean 1 80
+$moses/scripts/training/clean-corpus-n.perl $corpus/train $src $tgt $corpus/train.clean 1 80
 
 $LM/i686-m64/ngram-count -order 5 -interpolate -kndiscount -unk -text $corpus/train.clean.$tgt -lm $corpus/lang_models/$langmod.lm
 echo "lm done"
